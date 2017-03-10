@@ -1,3 +1,4 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+library:
+    resource: "@LibraryBundle/Controller/"
+    type:     annotation
+    prefix:   /library
