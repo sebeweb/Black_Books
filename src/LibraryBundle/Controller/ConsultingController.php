@@ -2,8 +2,10 @@
 
 namespace LibraryBundle\Controller;
 
+use LibraryBundle\Entity\Livre;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,11 +21,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ConsultingController extends Controller {
 
     /**
+     * @Route("/")
+     */
+    public function consultingBooks() {
+
+        return $this->render('default/index.html.twig');
+    }
+    /**
      * @Route("/books")
      */
     public function bookList() {
-
-        return $this->render('default/index.html.twig');
+        $livres = $this->getDoctrine()->getRepository(Livre::class)->findAll();
+        return new JsonResponse($livres);
     }
 
     /**

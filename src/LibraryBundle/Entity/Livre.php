@@ -90,7 +90,9 @@ class Livre implements \JsonSerializable {
     }
 
     public function jsonSerialize() {
-        
+        return array (
+            "titre"=> $this->titre
+        );
     }
 
 }
