@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Livre
  *
- * @ORM\Table(name="livre")
+ * @ORM\Table(name="livre", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_AC634F99FA891952", columns={"ISBN"})})
  * @ORM\Entity
  */
-class Livre {
+class Livre implements \JsonSerializable {
 
     /**
      * @var integer
@@ -22,9 +22,9 @@ class Livre {
     private $id;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="isbn", type="string", length=255, nullable=false)
+     * @ORM\Column(name="ISBN", type="integer", nullable=false)
      */
     private $isbn;
 
@@ -38,23 +38,16 @@ class Livre {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_de_parution", type="datetime", nullable=false)
+     * @ORM\Column(name="dateDeParution", type="date", nullable=false)
      */
-    private $dateDeParution;
+    private $datedeparution;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_de_disponibilite", type="datetime", nullable=true)
+     * @ORM\Column(name="dateDeDisponibilite", type="date", nullable=false)
      */
-    private $dateDeDisponibilite;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fk_exemplaire", type="string", length=255, nullable=true)
-     */
-    private $fkExemplaire;
+    private $datededisponibilite;
 
     function getId() {
         return $this->id;
@@ -68,16 +61,12 @@ class Livre {
         return $this->titre;
     }
 
-    function getDateDeParution(): \DateTime {
-        return $this->dateDeParution;
+    function getDatedeparution(): \DateTime {
+        return $this->datedeparution;
     }
 
-    function getDateDeDisponibilite(): \DateTime {
-        return $this->dateDeDisponibilite;
-    }
-
-    function getFkExemplaire() {
-        return $this->fkExemplaire;
+    function getDatededisponibilite(): \DateTime {
+        return $this->datededisponibilite;
     }
 
     function setId($id) {
@@ -92,16 +81,16 @@ class Livre {
         $this->titre = $titre;
     }
 
-    function setDateDeParution(\DateTime $dateDeParution) {
-        $this->dateDeParution = $dateDeParution;
+    function setDatedeparution(\DateTime $datedeparution) {
+        $this->datedeparution = $datedeparution;
     }
 
-    function setDateDeDisponibilite(\DateTime $dateDeDisponibilite) {
-        $this->dateDeDisponibilite = $dateDeDisponibilite;
+    function setDatededisponibilite(\DateTime $datededisponibilite) {
+        $this->datededisponibilite = $datededisponibilite;
     }
 
-    function setFkExemplaire($fkExemplaire) {
-        $this->fkExemplaire = $fkExemplaire;
+    public function jsonSerialize() {
+        
     }
 
 }
